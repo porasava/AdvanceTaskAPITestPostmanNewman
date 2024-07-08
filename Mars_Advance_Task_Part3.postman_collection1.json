@@ -1,0 +1,5401 @@
+{
+	"info": {
+		"_postman_id": "c9502c30-3e98-4979-a364-f097c28604c7",
+		"name": "Mars Advance Task Part3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29180168",
+		"_collection_link": "https://gold-space-591021.postman.co/workspace/AdvanceTaskPart3APITest-~e10b1ae2-e012-4263-a2e5-ca23e0d909c9/collection/29180168-c9502c30-3e98-4979-a364-f097c28604c7?action=share&source=collection_link&creator=29180168"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "authentication",
+					"item": [
+						{
+							"name": "signin",
+							"item": [
+								{
+									"name": "signIn",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"// Assertion - Check status code\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check Sign In success or failure\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"    if (response.isSuccess) {\r",
+													"        pm.expect(response, \"Sign In success\");\r",
+													"    } else {\r",
+													"        pm.expect(response.message, \"Error message should be appropriate\").to.be.oneOf([\r",
+													"            \"Invalid username or password\",\r",
+													"            \"Parameter can not be null\"\r",
+													"        ]);\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {}
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{authToken}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"rememberMe\": false,\n  \"email\": \"Tananya1@hotmail.com\",\n  \"password\": \"TananyaHappy\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/authentication/authentication/signin",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"authentication",
+												"authentication",
+												"signin"
+											]
+										},
+										"description": "signIn"
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"rememberMe\": false,\n  \"email\": \"Tananya1@hotmail.com\",\n  \"password\": \"TananyaHappy\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/authentication/authentication/signin",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"authentication",
+														"authentication",
+														"signin"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "wrong password",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"email\": \"tananya1@hotmail.com\",\n  \"password\": \"TananyaHappyzz\",\n  \"rememberMe\": \"false\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/authentication/authentication/signin",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"authentication",
+														"authentication",
+														"signin"
+													]
+												}
+											},
+											"_postman_previewlanguage": null,
+											"header": null,
+											"cookie": [],
+											"body": null
+										},
+										{
+											"name": "password less than 6 characters",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"rememberMe\": false,\n  \"email\": \"Tananya1@hotmail.com\",\n  \"password\": \"Tanany\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/authentication/authentication/signin",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"authentication",
+														"authentication",
+														"signin"
+													]
+												}
+											},
+											"_postman_previewlanguage": null,
+											"header": null,
+											"cookie": [],
+											"body": null
+										},
+										{
+											"name": "click on remember me",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"rememberMe\": true,\n  \"email\": \"Tananya1@hotmail.com\",\n  \"password\": \"TananyaHappy\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/authentication/authentication/signin",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"authentication",
+														"authentication",
+														"signin"
+													]
+												}
+											},
+											"_postman_previewlanguage": null,
+											"header": null,
+											"cookie": [],
+											"body": null
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "signup",
+							"item": [
+								{
+									"name": "register",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"function generateRandomString(length) {\r",
+													"    var text = \"\";\r",
+													"    var possible = \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\";\r",
+													"\r",
+													"    for (var i = 0; i < length; i++)\r",
+													"        text += possible.charAt(Math.floor(Math.random() * possible.length));\r",
+													"\r",
+													"    return text;\r",
+													"}\r",
+													"\r",
+													"var randomString = generateRandomString(5); // Generates a random string of length 5\r",
+													"var emailWithRandom = \"TananyaAPI7\" + randomString + \"@hotmail.com\";\r",
+													"\r",
+													"pm.environment.set(\"randomEmail\", emailWithRandom);"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"// Assertion - Check status code\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check registration success or failure\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"    if (response.isSuccess) {\r",
+													"        pm.expect(response, \"Registration success\");\r",
+													"    } else {\r",
+													"        pm.expect(response.message, \"Error message should be appropriate\").to.be.oneOf([\r",
+													"            \"Register error\",\r",
+													"            \"Parameter can not be null\"\r",
+													"        ]);\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{authToken}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Host",
+												"value": "<string>",
+												"disabled": true
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"firstName\": \"tananya\",\n  \"lastName\": \"Asavaoran\",\n  \"email\": \"{{randomEmail}}\",\n  \"password\": \"TananyaHappy\",\n  \"terms\": true\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/authentication/authentication/signup",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"authentication",
+												"authentication",
+												"signup"
+											]
+										},
+										"description": "register"
+									},
+									"response": [
+										{
+											"name": "correct mandatory field",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Host",
+														"value": "<string>"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"firstName\": \"tananya\",\n  \"lastName\": \"Asavaoran\",\n  \"email\": \"TananyaAPI7@hotmail.com\",\n  \"password\": \"TananyaHappy\",\n  \"terms\": true\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/authentication/authentication/signup",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"authentication",
+														"authentication",
+														"signup"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "enters a number in the 'First Name' field",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Host",
+														"value": "<string>"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"countryDialCode\": \"<string>\",\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"mobilePhone\": \"<string>\",\n  \"password\": \"<string>\",\n  \"terms\": \"<boolean>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/authentication/authentication/signup",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"authentication",
+														"authentication",
+														"signup"
+													]
+												}
+											},
+											"_postman_previewlanguage": null,
+											"header": null,
+											"cookie": [],
+											"body": null
+										},
+										{
+											"name": "enters a number in the 'Last Name' field",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Host",
+														"value": "<string>"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"countryDialCode\": \"<string>\",\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"mobilePhone\": \"<string>\",\n  \"password\": \"<string>\",\n  \"terms\": \"<boolean>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/authentication/authentication/signup",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"authentication",
+														"authentication",
+														"signup"
+													]
+												}
+											},
+											"_postman_previewlanguage": null,
+											"header": null,
+											"cookie": [],
+											"body": null
+										},
+										{
+											"name": "incorrect format in the 'Email Address' field",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Host",
+														"value": "<string>"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"countryDialCode\": \"<string>\",\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"mobilePhone\": \"<string>\",\n  \"password\": \"<string>\",\n  \"terms\": \"<boolean>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/authentication/authentication/signup",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"authentication",
+														"authentication",
+														"signup"
+													]
+												}
+											},
+											"_postman_previewlanguage": null,
+											"header": null,
+											"cookie": [],
+											"body": null
+										},
+										{
+											"name": "Password less than 6 characters",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Host",
+														"value": "<string>"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"countryDialCode\": \"<string>\",\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"mobilePhone\": \"<string>\",\n  \"password\": \"<string>\",\n  \"terms\": \"<boolean>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/authentication/authentication/signup",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"authentication",
+														"authentication",
+														"signup"
+													]
+												}
+											},
+											"_postman_previewlanguage": null,
+											"header": null,
+											"cookie": [],
+											"body": null
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "updatePassword",
+							"item": [
+								{
+									"name": "updatePassword",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"// Assertion - Check status code\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check update password success or failure\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"    if (response.success) {\r",
+													"        pm.expect(response, \"Password Changed Successfully\");\r",
+													"    } else {\r",
+													"        pm.expect(response.message, \"Error message should be appropriate\").to.be.oneOf([\r",
+													"            \"Password Verification Failed\",\r",
+													"            \"Parameter can not be null\"\r",
+													"        ]);\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{authToken}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"oldPassword\": \"TananyaHappy\",\n  \"newPassword\": \"TananyaHappy1\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/authentication/authentication/updatePassword",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"authentication",
+												"authentication",
+												"updatePassword"
+											]
+										},
+										"description": "updatePassword"
+									},
+									"response": []
+								},
+								{
+									"name": "updatePassword Back",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"// Assertion - Check status code\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check update password success or failure\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"    if (response.success) {\r",
+													"        pm.expect(response, \"Password Changed Successfully\");\r",
+													"    } else {\r",
+													"        pm.expect(response.message, \"Error message should be appropriate\").to.be.oneOf([\r",
+													"            \"Password Verification Failed\",\r",
+													"            \"Parameter can not be null\"\r",
+													"        ]);\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{authToken}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"oldPassword\": \"TananyaHappy1\",\n  \"newPassword\": \"TananyaHappy\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/authentication/authentication/updatePassword",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"authentication",
+												"authentication",
+												"updatePassword"
+											]
+										},
+										"description": "updatePassword"
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "listing",
+			"item": [
+				{
+					"name": "listing",
+					"item": [
+						{
+							"name": "GetServiceCategoryCount",
+							"item": [
+								{
+									"name": "getServiceCategoryCount",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"// Assertion - Check status code\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check Get Service Category Count success\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"    // Correctly check for 'success' not 'isSuccess'\r",
+													"    pm.expect(response.success, \"Expect success to be true\").to.be.true;\r",
+													"});\r",
+													"\r",
+													"// There is no handling for failure scenario based on your initial script, but it could look like this:\r",
+													"pm.test(\"Handle failure scenario\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"    if (!response.success) {\r",
+													"        // Log the error message for further investigation\r",
+													"        console.log(\"Failed with error:\", response.message);\r",
+													"        pm.expect(response.message, \"Error message should be appropriate\").to.include(\"known error part\");\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{authToken}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"terms\": {\n    \"searchString\": \"tananya\",\n    \"categoryIndex\": null,\n    \"subcategoryIndex\": null,\n    \"uId\": null\n  },\n  \"sortPagination\": {\n    \"offset\": 0,\n    \"limit\": 9\n  }\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{listingUrl}}/listing/listing/GetServiceCategoryCount",
+											"host": [
+												"{{listingUrl}}"
+											],
+											"path": [
+												"listing",
+												"listing",
+												"GetServiceCategoryCount"
+											]
+										},
+										"description": "getServiceCategoryCount"
+									},
+									"response": [
+										{
+											"name": "get service category response",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"terms\": {\n    \"searchString\": \"tananya\",\n    \"categoryIndex\": null,\n    \"subcategoryIndex\": null,\n    \"uId\": null\n  },\n  \"sortPagination\": {\n    \"offset\": 0,\n    \"limit\": 9\n  }\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{listingUrl}}/listing/listing/GetServiceCategoryCount",
+													"host": [
+														"{{listingUrl}}"
+													],
+													"path": [
+														"listing",
+														"listing",
+														"GetServiceCategoryCount"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "addListing",
+							"item": [
+								{
+									"name": "addListing",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"// Assertion - Check status code\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check add Listing success or failure\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"    if (response.success) {\r",
+													"        pm.expect(response, \"add Listing Successfully\");\r",
+													"    } else {\r",
+													"        pm.expect(response.message, \"Error message should be appropriate\").to.be.oneOf([\r",
+													"            \"add Listing Failed\",\r",
+													"            \"Parameter can not be null\"\r",
+													"        ]);\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{authToken}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"title\": \"API Test Title\",\n  \"description\": \"API Test Description\",\n  \"categoryId\": \"8\",\n  \"subcategoryId\": \"1\",\n  \"tags\": [\n    {\n      \"id\": \"Tananya\",\n      \"text\": \"Tananya\"\n    }\n  ],\n  \"serviceType\": 0,\n  \"locationType\": 1,\n  \"availability\": {\n    \"startDate\": \"2024-06-20\",\n    \"endDate\": \"\",\n    \"dayEntries\": [\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      },\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      },\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      },\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      },\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      },\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      },\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      }\n    ]\n  },\n  \"skillTrade\": [\n    {\n      \"id\": \"Automation Tester\",\n      \"text\": \"Automation Tester\"\n    }\n  ],\n  \"isTradable\": true,\n  \"charge\": 0,\n  \"credentials\": true,\n  \"isActive\": true\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{listingUrl}}/listing/listing/addListing",
+											"host": [
+												"{{listingUrl}}"
+											],
+											"path": [
+												"listing",
+												"listing",
+												"addListing"
+											]
+										},
+										"description": "addListing"
+									},
+									"response": [
+										{
+											"name": "Add Listing",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"title\": \"API Test Title\",\n  \"description\": \"API Test Description\",\n  \"categoryId\": \"8\",\n  \"subcategoryId\": \"1\",\n  \"tags\": [\n    {\n      \"id\": \"Tananya\",\n      \"text\": \"Tananya\"\n    }\n  ],\n  \"serviceType\": 0,\n  \"locationType\": 1,\n  \"availability\": {\n    \"startDate\": \"2024-06-20\",\n    \"endDate\": \"\",\n    \"dayEntries\": [\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      },\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      },\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      },\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      },\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      },\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      },\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      }\n    ]\n  },\n  \"skillTrade\": [\n    {\n      \"id\": \"Automation Tester\",\n      \"text\": \"Automation Tester\"\n    }\n  ],\n  \"isTradable\": true,\n  \"charge\": 0,\n  \"credentials\": true,\n  \"isActive\": true\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{listingUrl}}/listing/listing/addListing",
+													"host": [
+														"{{listingUrl}}"
+													],
+													"path": [
+														"listing",
+														"listing",
+														"addListing"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Add Listing with blank Title",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"title\": \"\",\n  \"description\": \"API Test Description\",\n  \"categoryId\": \"8\",\n  \"subcategoryId\": \"1\",\n  \"tags\": [\n    {\n      \"id\": \"Tananya\",\n      \"text\": \"Tananya\"\n    }\n  ],\n  \"serviceType\": 0,\n  \"locationType\": 1,\n  \"availability\": {\n    \"startDate\": \"2024-06-20\",\n    \"endDate\": \"\",\n    \"dayEntries\": [\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      },\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      },\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      },\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      },\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      },\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      },\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      }\n    ]\n  },\n  \"skillTrade\": [\n    {\n      \"id\": \"Automation Tester\",\n      \"text\": \"Automation Tester\"\n    }\n  ],\n  \"isTradable\": true,\n  \"charge\": 0,\n  \"credentials\": true,\n  \"isActive\": true\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{listingUrl}}/listing/listing/addListing",
+													"host": [
+														"{{listingUrl}}"
+													],
+													"path": [
+														"listing",
+														"listing",
+														"addListing"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Add Listing with blank description",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"title\": \"API Test Title\",\n  \"description\": \"\",\n  \"categoryId\": \"8\",\n  \"subcategoryId\": \"1\",\n  \"tags\": [\n    {\n      \"id\": \"Tananya\",\n      \"text\": \"Tananya\"\n    }\n  ],\n  \"serviceType\": 0,\n  \"locationType\": 1,\n  \"availability\": {\n    \"startDate\": \"2024-06-20\",\n    \"endDate\": \"\",\n    \"dayEntries\": [\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      },\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      },\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      },\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      },\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      },\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      },\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      }\n    ]\n  },\n  \"skillTrade\": [\n    {\n      \"id\": \"Automation Tester\",\n      \"text\": \"Automation Tester\"\n    }\n  ],\n  \"isTradable\": true,\n  \"charge\": 0,\n  \"credentials\": true,\n  \"isActive\": true\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{listingUrl}}/listing/listing/addListing",
+													"host": [
+														"{{listingUrl}}"
+													],
+													"path": [
+														"listing",
+														"listing",
+														"addListing"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Add Listing with duplicate data",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"title\": \"API Test Title\",\n  \"description\": \"API Test Description\",\n  \"categoryId\": \"8\",\n  \"subcategoryId\": \"1\",\n  \"tags\": [\n    {\n      \"id\": \"Tananya\",\n      \"text\": \"Tananya\"\n    }\n  ],\n  \"serviceType\": 0,\n  \"locationType\": 1,\n  \"availability\": {\n    \"startDate\": \"2024-06-20\",\n    \"endDate\": \"\",\n    \"dayEntries\": [\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      },\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      },\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      },\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      },\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      },\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      },\n      {\n        \"StartTime\": \"\",\n        \"EndTime\": \"\",\n        \"Available\": false\n      }\n    ]\n  },\n  \"skillTrade\": [\n    {\n      \"id\": \"Automation Tester\",\n      \"text\": \"Automation Tester\"\n    }\n  ],\n  \"isTradable\": true,\n  \"charge\": 0,\n  \"credentials\": true,\n  \"isActive\": true\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{listingUrl}}/listing/listing/addListing",
+													"host": [
+														"{{listingUrl}}"
+													],
+													"path": [
+														"listing",
+														"listing",
+														"addListing"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "getMultipleServiceListing",
+							"item": [
+								{
+									"name": "getMultipleServiceListing",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"let responseData = pm.response.json();\r",
+													"if (responseData.success && responseData.data.length > 0) {\r",
+													"    let personListingId = responseData.data[0].id;\r",
+													"    pm.environment.set(\"personListingId\", personListingId);\r",
+													"    console.log(\"Listing ID set to:\", personListingId);\r",
+													"} else {\r",
+													"    console.error('Failed to fetch valid response or no Listing data available.');\r",
+													"}\r",
+													"\r",
+													"// Assertion - Check status code\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check get Multiple Service Listing success or failure\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"     // Check if the response has success true\r",
+													"    pm.expect(response.success, \"Expect success to be true\").to.be.true;\r",
+													"    // Ensure that data is not empty\r",
+													"    pm.expect(response.data, \"Data array should not be empty\").to.be.an('array').that.is.not.empty;\r",
+													"\r",
+													"});\r",
+													"\r",
+													"// If you need to test failure scenarios, you should handle them separately:\r",
+													"pm.test(\"Handle failure scenarios\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"    if (!response.success) {\r",
+													"        console.log(\"Failed with error:\", response.message);\r",
+													"        // Check if the response message meets certain criteria if needed\r",
+													"        pm.expect(response.message, \"Error message should be appropriate\").to.include(\"some known error message part\");\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{authToken}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"limit\": 5,\n  \"offset\": 0\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{listingUrl}}/listing/listing/getMultipleServiceListing",
+											"host": [
+												"{{listingUrl}}"
+											],
+											"path": [
+												"listing",
+												"listing",
+												"getMultipleServiceListing"
+											]
+										},
+										"description": "getMultipleServiceListing"
+									},
+									"response": [
+										{
+											"name": "getMultipleServiceListing",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"limit\": 5,\n  \"offset\": 0\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{listingUrl}}/listing/listing/getMultipleServiceListing",
+													"host": [
+														"{{listingUrl}}"
+													],
+													"path": [
+														"listing",
+														"listing",
+														"getMultipleServiceListing"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "getBalance",
+							"item": [
+								{
+									"name": "getBalance",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"// Assertion - Check status code\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check Get Balance success\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"    // Correctly check for 'success' not 'isSuccess'\r",
+													"    pm.expect(response.success, \"Expect success to be true\").to.be.true;\r",
+													"});\r",
+													"\r",
+													"// There is no handling for failure scenario based on your initial script, but it could look like this:\r",
+													"pm.test(\"Handle failure scenario\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"    if (!response.success) {\r",
+													"        // Log the error message for further investigation\r",
+													"        console.log(\"Failed with error:\", response.message);\r",
+													"        pm.expect(response.message, \"Error message should be appropriate\").to.include(\"known error part\");\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{authToken}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Host",
+												"value": "<string>",
+												"disabled": true
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"countryDialCode\": \"<string>\",\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"mobilePhone\": \"<string>\",\n  \"password\": \"<string>\",\n  \"terms\": \"<boolean>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{listingUrl}}/listing/listing/getBalance",
+											"host": [
+												"{{listingUrl}}"
+											],
+											"path": [
+												"listing",
+												"listing",
+												"getBalance"
+											]
+										},
+										"description": "getBalance"
+									},
+									"response": [
+										{
+											"name": "get balance",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Host",
+														"value": "<string>",
+														"disabled": true
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{listingUrl}}/listing/listing/getBalance",
+													"host": [
+														"{{listingUrl}}"
+													],
+													"path": [
+														"listing",
+														"listing",
+														"getBalance"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "getCategories",
+							"item": [
+								{
+									"name": "getCategories",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"// Assertion - Check status code\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check Get Categories success\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"    // Correctly check for 'success' not 'isSuccess'\r",
+													"    pm.expect(response.success, \"Expect success to be true\").to.be.true;\r",
+													"});\r",
+													"\r",
+													"// There is no handling for failure scenario based on your initial script, but it could look like this:\r",
+													"pm.test(\"Handle failure scenario\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"    if (!response.success) {\r",
+													"        // Log the error message for further investigation\r",
+													"        console.log(\"Failed with error:\", response.message);\r",
+													"        pm.expect(response.message, \"Error message should be appropriate\").to.include(\"known error part\");\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{authToken}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Host",
+												"value": "<string>",
+												"disabled": true
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"countryDialCode\": \"<string>\",\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"mobilePhone\": \"<string>\",\n  \"password\": \"<string>\",\n  \"terms\": \"<boolean>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{listingUrl}}/listing/listing/getCategories",
+											"host": [
+												"{{listingUrl}}"
+											],
+											"path": [
+												"listing",
+												"listing",
+												"getCategories"
+											]
+										},
+										"description": "getCategories"
+									},
+									"response": [
+										{
+											"name": "get categories",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Host",
+														"value": "<string>",
+														"disabled": true
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{listingUrl}}/listing/listing/getCategories",
+													"host": [
+														"{{listingUrl}}"
+													],
+													"path": [
+														"listing",
+														"listing",
+														"getCategories"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "getSentRequests",
+							"item": [
+								{
+									"name": "getSentRequests",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"// Assertion - Check status code\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check Get Sent Requests success\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"    // Correctly check for 'success' not 'isSuccess'\r",
+													"    pm.expect(response.success, \"Expect success to be true\").to.be.true;\r",
+													"});\r",
+													"\r",
+													"// There is no handling for failure scenario based on your initial script, but it could look like this:\r",
+													"pm.test(\"Handle failure scenario\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"    if (!response.success) {\r",
+													"        // Log the error message for further investigation\r",
+													"        console.log(\"Failed with error:\", response.message);\r",
+													"        pm.expect(response.message, \"Error message should be appropriate\").to.include(\"known error part\");\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{authToken}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Host",
+												"value": "<string>",
+												"disabled": true
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{listingUrl}}/listing/listing/getSentRequests",
+											"host": [
+												"{{listingUrl}}"
+											],
+											"path": [
+												"listing",
+												"listing",
+												"getSentRequests"
+											]
+										},
+										"description": "getSentRequests"
+									},
+									"response": [
+										{
+											"name": "get sent requests",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Host",
+														"value": "<string>",
+														"disabled": true
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "{{listingUrl}}/listing/listing/getSentRequests",
+													"host": [
+														"{{listingUrl}}"
+													],
+													"path": [
+														"listing",
+														"listing",
+														"getSentRequests"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "searchListings",
+							"item": [
+								{
+									"name": "searchListings",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"// Assertion - Check status code\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check search Listings success\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"    // Correctly check for 'success' not 'isSuccess'\r",
+													"    pm.expect(response.success, \"Expect success to be true\").to.be.true;\r",
+													"});\r",
+													"\r",
+													"// There is no handling for failure scenario based on your initial script, but it could look like this:\r",
+													"pm.test(\"Handle failure scenario\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"    if (!response.success) {\r",
+													"        // Log the error message for further investigation\r",
+													"        console.log(\"Failed with error:\", response.message);\r",
+													"        pm.expect(response.message, \"Error message should be appropriate\").to.include(\"known error part\");\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{authToken}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"terms\": {\n    \"searchString\": \"\",\n    \"categoryIndex\": 1,\n    \"subcategoryIndex\": null,\n    \"uId\": null\n  },\n  \"sortPagination\": {\n    \"offset\": 0,\n    \"limit\": 9\n  }\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{listingUrl}}/listing/listing/searchListings",
+											"host": [
+												"{{listingUrl}}"
+											],
+											"path": [
+												"listing",
+												"listing",
+												"searchListings"
+											]
+										},
+										"description": "searchListings Copy"
+									},
+									"response": [
+										{
+											"name": "searchListing",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"terms\": {\n    \"searchString\": \"\",\n    \"categoryIndex\": 1,\n    \"subcategoryIndex\": null,\n    \"uId\": null\n  },\n  \"sortPagination\": {\n    \"offset\": 0,\n    \"limit\": 9\n  }\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{listingUrl}}/listing/listing/searchListings",
+													"host": [
+														"{{listingUrl}}"
+													],
+													"path": [
+														"listing",
+														"listing",
+														"searchListings"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "toggleIsActive",
+							"item": [
+								{
+									"name": "toggleIsActive",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"// Assertion - Check status code\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check toggle Is Active success\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"    // Correctly check for 'success' not 'isSuccess'\r",
+													"    pm.expect(response.success, \"Expect success to be true\").to.be.true;\r",
+													"});\r",
+													"\r",
+													"// There is no handling for failure scenario based on your initial script, but it could look like this:\r",
+													"pm.test(\"Handle failure scenario\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"    if (!response.success) {\r",
+													"        // Log the error message for further investigation\r",
+													"        console.log(\"Failed with error:\", response.message);\r",
+													"        pm.expect(response.message, \"Error message should be appropriate\").to.include(\"known error part\");\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disabledSystemHeaders": {}
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{authToken}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/octet-stream",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "\"{{personListingId}}\"",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{listingUrl}}/listing/listing/toggleIsActive",
+											"host": [
+												"{{listingUrl}}"
+											],
+											"path": [
+												"listing",
+												"listing",
+												"toggleIsActive"
+											]
+										},
+										"description": "toggleIsActive"
+									},
+									"response": [
+										{
+											"name": "toggleIsActive",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "\"{{personListingId}}\"",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{listingUrl}}/listing/listing/toggleIsActive",
+													"host": [
+														"{{listingUrl}}"
+													],
+													"path": [
+														"listing",
+														"listing",
+														"toggleIsActive"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "deleteServiceListing",
+							"item": [
+								{
+									"name": "deleteServiceListing",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"// Assertion - Check status code\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check delete service Listing success\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"    // Correctly check for 'success' not 'isSuccess'\r",
+													"    pm.expect(response.success, \"Expect success to be true\").to.be.true;\r",
+													"});\r",
+													"\r",
+													"// There is no handling for failure scenario based on your initial script, but it could look like this:\r",
+													"pm.test(\"Handle failure scenario\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"    if (!response.success) {\r",
+													"        // Log the error message for further investigation\r",
+													"        console.log(\"Failed with error:\", response.message);\r",
+													"        pm.expect(response.message, \"Error message should be appropriate\").to.include(\"known error part\");\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{authToken}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/octet-stream",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "\"{{personListingId}}\"",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{listingUrl}}/listing/listing/deleteServiceListing",
+											"host": [
+												"{{listingUrl}}"
+											],
+											"path": [
+												"listing",
+												"listing",
+												"deleteServiceListing"
+											]
+										},
+										"description": "deleteServiceListing"
+									},
+									"response": [
+										{
+											"name": "delete Listing",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "\r\n   \"{{personListingId}}\"\r\n",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{listingUrl}}/listing/listing/deleteServiceListing",
+													"host": [
+														"{{listingUrl}}"
+													],
+													"path": [
+														"listing",
+														"listing",
+														"deleteServiceListing"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "notification",
+			"item": [
+				{
+					"name": "notification",
+					"item": [
+						{
+							"name": "getNewNotificationCount",
+							"item": [
+								{
+									"name": "getNewNotificationCount",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"// Assertion - Check status code\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check get New Notification Count success\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"    // Correctly check for 'success' not 'isSuccess'\r",
+													"    pm.expect(response.success, \"Expect success to be true\").to.be.true;\r",
+													"});\r",
+													"\r",
+													"// There is no handling for failure scenario based on your initial script, but it could look like this:\r",
+													"pm.test(\"Handle failure scenario\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"    if (!response.success) {\r",
+													"        // Log the error message for further investigation\r",
+													"        console.log(\"Failed with error:\", response.message);\r",
+													"        pm.expect(response.message, \"Error message should be appropriate\").to.include(\"known error part\");\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{authToken}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{profileUrl}}/notification/notification/getNewNotificationCount",
+											"host": [
+												"{{profileUrl}}"
+											],
+											"path": [
+												"notification",
+												"notification",
+												"getNewNotificationCount"
+											]
+										},
+										"description": "getNewNotificationCount"
+									},
+									"response": [
+										{
+											"name": "getNewNotificationCount",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{profileUrl}}/notification/notification/getNewNotificationCount",
+													"host": [
+														"{{profileUrl}}"
+													],
+													"path": [
+														"notification",
+														"notification",
+														"getNewNotificationCount"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "getNotification",
+							"item": [
+								{
+									"name": "getNotification loadMore",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"let responseData = pm.response.json();\r",
+													"if (responseData.success && responseData.userNotifications.length > 0) {\r",
+													"    let notificationId = responseData.userNotifications[0].id;\r",
+													"    pm.environment.set(\"notificationId\", notificationId);\r",
+													"    console.log(\"notification ID set to:\", notificationId);\r",
+													"} else {\r",
+													"    console.error('Failed to fetch valid response or no notification data available.');\r",
+													"}\r",
+													"\r",
+													"// Assertion - Check status code\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check get Notification load More success\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"    // Correctly check for 'success' not 'isSuccess'\r",
+													"    pm.expect(response.success, \"Expect success to be true\").to.be.true;\r",
+													"});\r",
+													"\r",
+													"// There is no handling for failure scenario based on your initial script, but it could look like this:\r",
+													"pm.test(\"Handle failure scenario\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"    if (!response.success) {\r",
+													"        // Log the error message for further investigation\r",
+													"        console.log(\"Failed with error:\", response.message);\r",
+													"        pm.expect(response.message, \"Error message should be appropriate\").to.include(\"known error part\");\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{authToken}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "text/plain"
+											}
+										],
+										"body": {
+											"mode": "file",
+											"file": {}
+										},
+										"url": {
+											"raw": "{{profileUrl}}/notification/notification/getNotification/?loadMore=<string>&offSet=<string>&_=<string>",
+											"host": [
+												"{{profileUrl}}"
+											],
+											"path": [
+												"notification",
+												"notification",
+												"getNotification",
+												""
+											],
+											"query": [
+												{
+													"key": "loadMore",
+													"value": "<string>"
+												},
+												{
+													"key": "offSet",
+													"value": "<string>"
+												},
+												{
+													"key": "_",
+													"value": "<string>"
+												}
+											]
+										},
+										"description": "getNotification loadMore"
+									},
+									"response": [
+										{
+											"name": "getNotification loadMore",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "text/plain"
+													}
+												],
+												"url": {
+													"raw": "{{profileUrl}}/notification/notification/getNotification/?loadMore=<string>&offSet=<string>&_=<string>",
+													"host": [
+														"{{profileUrl}}"
+													],
+													"path": [
+														"notification",
+														"notification",
+														"getNotification",
+														""
+													],
+													"query": [
+														{
+															"key": "loadMore",
+															"value": "<string>"
+														},
+														{
+															"key": "offSet",
+															"value": "<string>"
+														},
+														{
+															"key": "_",
+															"value": "<string>"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "readAllNotifications",
+							"item": [
+								{
+									"name": "readAllNotifications",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"// Assertion - Check status code\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check read bAll Notifications success\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"    // Correctly check for 'success' not 'isSuccess'\r",
+													"    pm.expect(response.success, \"Expect success to be true\").to.be.true;\r",
+													"});\r",
+													"\r",
+													"// There is no handling for failure scenario based on your initial script, but it could look like this:\r",
+													"pm.test(\"Handle failure scenario\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"    if (!response.success) {\r",
+													"        // Log the error message for further investigation\r",
+													"        console.log(\"Failed with error:\", response.message);\r",
+													"        pm.expect(response.message, \"Error message should be appropriate\").to.include(\"known error part\");\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{authToken}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "text/plain"
+											}
+										],
+										"body": {
+											"mode": "file",
+											"file": {}
+										},
+										"url": {
+											"raw": "{{profileUrl}}/notification/notification/readAllNotifications",
+											"host": [
+												"{{profileUrl}}"
+											],
+											"path": [
+												"notification",
+												"notification",
+												"readAllNotifications"
+											]
+										},
+										"description": "readAllNotifications"
+									},
+									"response": [
+										{
+											"name": "readAllNotifications",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "text/plain"
+													}
+												],
+												"url": {
+													"raw": "{{profileUrl}}/notification/notification/readAllNotifications",
+													"host": [
+														"{{profileUrl}}"
+													],
+													"path": [
+														"notification",
+														"notification",
+														"readAllNotifications"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "readMarkedNotifications",
+							"item": [
+								{
+									"name": "readMarkedNotifications",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"// Assertion - Check status code\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check read Marked Notifications success\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"    // Correctly check for 'success' not 'isSuccess'\r",
+													"    pm.expect(response.success, \"Expect success to be true\").to.be.true;\r",
+													"});\r",
+													"\r",
+													"// There is no handling for failure scenario based on your initial script, but it could look like this:\r",
+													"pm.test(\"Handle failure scenario\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"    if (!response.success) {\r",
+													"        // Log the error message for further investigation\r",
+													"        console.log(\"Failed with error:\", response.message);\r",
+													"        pm.expect(response.message, \"Error message should be appropriate\").to.include(\"known error part\");\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{authToken}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "multipart/form-data",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "ids",
+													"value": "{{notificationId}}",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{profileUrl}}/notification/notification/readMarkedNotifications",
+											"host": [
+												"{{profileUrl}}"
+											],
+											"path": [
+												"notification",
+												"notification",
+												"readMarkedNotifications"
+											]
+										},
+										"description": "readMarkedNotifications"
+									},
+									"response": [
+										{
+											"name": "Marked as read Notifications",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "multipart/form-data",
+														"disabled": true
+													}
+												],
+												"url": {
+													"raw": "{{profileUrl}}/notification/notification/readMarkedNotifications",
+													"host": [
+														"{{profileUrl}}"
+													],
+													"path": [
+														"notification",
+														"notification",
+														"readMarkedNotifications"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "removeMarkedNotifications",
+							"item": [
+								{
+									"name": "removeMarkedNotifications",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"// Assertion - Check status code\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check remove Marked Notifications success\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"    // Correctly check for 'success' not 'isSuccess'\r",
+													"    pm.expect(response.success, \"Expect success to be true\").to.be.true;\r",
+													"});\r",
+													"\r",
+													"// There is no handling for failure scenario based on your initial script, but it could look like this:\r",
+													"pm.test(\"Handle failure scenario\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"    if (!response.success) {\r",
+													"        // Log the error message for further investigation\r",
+													"        console.log(\"Failed with error:\", response.message);\r",
+													"        pm.expect(response.message, \"Error message should be appropriate\").to.include(\"known error part\");\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{authToken}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "multipart/form-data",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "ids",
+													"value": "{{notificationId}}",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{profileUrl}}/notification/notification/removeMarkedNotifications",
+											"host": [
+												"{{profileUrl}}"
+											],
+											"path": [
+												"notification",
+												"notification",
+												"removeMarkedNotifications"
+											]
+										},
+										"description": "readMarkedNotifications Copy"
+									},
+									"response": [
+										{
+											"name": "Delete Notifications",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "formdata",
+													"formdata": [
+														{
+															"key": "ids",
+															"value": "{{notificationId}}",
+															"type": "text"
+														}
+													],
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{profileUrl}}/notification/notification/removeMarkedNotifications",
+													"host": [
+														"{{profileUrl}}"
+													],
+													"path": [
+														"notification",
+														"notification",
+														"removeMarkedNotifications"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "profile",
+			"item": [
+				{
+					"name": "profile",
+					"item": [
+						{
+							"name": "updateAvailability",
+							"item": [
+								{
+									"name": "updateAvailability",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"// Assertion - Check status code\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check update Availability success\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"    // Correctly check for 'success' not 'isSuccess'\r",
+													"    pm.expect(response.success, \"Expect success to be true\").to.be.true;\r",
+													"});\r",
+													"\r",
+													"// There is no handling for failure scenario based on your initial script, but it could look like this:\r",
+													"pm.test(\"Handle failure scenario\", function() {\r",
+													"    var response = pm.response.json();\r",
+													"    if (!response.success) {\r",
+													"        // Log the error message for further investigation\r",
+													"        console.log(\"Failed with error:\", response.message);\r",
+													"        pm.expect(response.message, \"Error message should be appropriate\").to.include(\"known error part\");\r",
+													"    }\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{authToken}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Host",
+												"value": "<string>",
+												"disabled": true
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"AvailabilityType\": \"0\",\n  \"AvailableHours\": \"0\",\n  \"EarnTarget\": \"0\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{profileUrl}}/profile/profile/updateAvailability",
+											"host": [
+												"{{profileUrl}}"
+											],
+											"path": [
+												"profile",
+												"profile",
+												"updateAvailability"
+											]
+										},
+										"description": "updateAvailability"
+									},
+									"response": [
+										{
+											"name": "updateAvailability",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Host",
+														"value": "<string>"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"AvailabilityType\": \"0\",\n  \"AvailableHours\": \"0\",\n  \"EarnTarget\": \"0\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{profileUrl}}/profile/profile/updateAvailability",
+													"host": [
+														"{{profileUrl}}"
+													],
+													"path": [
+														"profile",
+														"profile",
+														"updateAvailability"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "updateFirstAndLastName",
+							"item": [
+								{
+									"name": "updateFirstAndLastName",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{authToken}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Host",
+												"value": "<string>",
+												"disabled": true
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"firstName\": \"TananyaUpdate\",\n  \"lastName\": \"Happy0Update\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{profileUrl}}/profile/profile/updateFirstAndLastName",
+											"host": [
+												"{{profileUrl}}"
+											],
+											"path": [
+												"profile",
+												"profile",
+												"updateFirstAndLastName"
+											]
+										},
+										"description": "updateFirstAndLastName"
+									},
+									"response": [
+										{
+											"name": "Update First and Last name",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Host",
+														"value": "<string>",
+														"disabled": true
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"firstName\": \"TananyaUpdate\",\n  \"lastName\": \"Happy0Update\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{profileUrl}}/profile/profile/updateFirstAndLastName",
+													"host": [
+														"{{profileUrl}}"
+													],
+													"path": [
+														"profile",
+														"profile",
+														"updateFirstAndLastName"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Update First and Last name back",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Host",
+														"value": "<string>",
+														"disabled": true
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"firstName\": \"Tananya\",\n  \"lastName\": \"Happy0\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{profileUrl}}/profile/profile/updateFirstAndLastName",
+													"host": [
+														"{{profileUrl}}"
+													],
+													"path": [
+														"profile",
+														"profile",
+														"updateFirstAndLastName"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Language",
+							"item": [
+								{
+									"name": "addLanguage",
+									"item": [
+										{
+											"name": "addLangauge",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"let response = pm.response.json();\r",
+															"if (response.success && response.personLanguageId) {\r",
+															"    pm.environment.set(\"personLanguageId\", response.personLanguageId);\r",
+															"}\r",
+															"\r",
+															"// Assertion - Check status code\r",
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"\r",
+															"pm.test(\"Check add Language success\", function() {\r",
+															"    var response = pm.response.json();\r",
+															"    // Correctly check for 'success' not 'isSuccess'\r",
+															"    pm.expect(response.success, \"Expect success to be true\").to.be.true;\r",
+															"});\r",
+															"\r",
+															"// There is no handling for failure scenario based on your initial script, but it could look like this:\r",
+															"pm.test(\"Handle failure scenario\", function() {\r",
+															"    var response = pm.response.json();\r",
+															"    if (!response.success) {\r",
+															"        // Log the error message for further investigation\r",
+															"        console.log(\"Failed with error:\", response.message);\r",
+															"        pm.expect(response.message, \"Error message should be appropriate\").to.include(\"known error part\");\r",
+															"    }\r",
+															"});"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{authToken}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Host",
+														"value": "<string>",
+														"disabled": true
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"name\": \"English\",\n  \"level\": \"Conversational\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{profileUrl}}/profile/profile/addLanguage",
+													"host": [
+														"{{profileUrl}}"
+													],
+													"path": [
+														"profile",
+														"profile",
+														"addLanguage"
+													]
+												},
+												"description": "addLangauge"
+											},
+											"response": [
+												{
+													"name": "correct mandatory",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Host",
+																"value": "<string>",
+																"disabled": true
+															},
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"name\": \"English\",\n  \"level\": \"Conversational\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{profileUrl}}/profile/profile/addLanguage",
+															"host": [
+																"{{profileUrl}}"
+															],
+															"path": [
+																"profile",
+																"profile",
+																"addLanguage"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												},
+												{
+													"name": "Add duplicate on Language field",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Host",
+																"value": "<string>",
+																"disabled": true
+															},
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"name\": \"English\",\n  \"level\": \"Conversational\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{profileUrl}}/profile/profile/addLanguage",
+															"host": [
+																"{{profileUrl}}"
+															],
+															"path": [
+																"profile",
+																"profile",
+																"addLanguage"
+															]
+														}
+													},
+													"_postman_previewlanguage": null,
+													"header": null,
+													"cookie": [],
+													"body": null
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "getLanguage",
+									"item": [
+										{
+											"name": "getLangauge",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"let response = pm.response.json();\r",
+															"// Check if the response array is not empty and has the data\r",
+															"if (response.length > 0 && response[0].hasOwnProperty('personLanguageId')) {\r",
+															"    // Set the personLanguageId as an environment variable\r",
+															"    pm.environment.set(\"personLanguageId\", response[0].personLanguageId);\r",
+															"}\r",
+															"\r",
+															"// Assertion - Check status code\r",
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"\r",
+															"// Assertion to check if the 'personLanguageId' is correct\r",
+															"pm.test(\"Check get Language success\", function() {\r",
+															"    pm.expect(response.length, \"Response should not be empty\").to.be.above(0);\r",
+															"    pm.expect(response[0], \"First item should have personLanguageId\").to.have.property(\"personLanguageId\");\r",
+															"});\r",
+															"\r",
+															"// Handle failure scenario\r",
+															"pm.test(\"Handle failure scenario\", function() {\r",
+															"    if (response.length === 0 || !response[0].personLanguageId) {\r",
+															"        console.log(\"Failed with error: Missing personLanguageId\");\r",
+															"        pm.expect.fail(\"No personLanguageId found or response is empty.\");\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{authToken}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [
+													{
+														"key": "Host",
+														"value": "<string>",
+														"disabled": true
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"disabled": true
+													}
+												],
+												"url": {
+													"raw": "{{profileUrl}}/profile/profile/getLanguage",
+													"host": [
+														"{{profileUrl}}"
+													],
+													"path": [
+														"profile",
+														"profile",
+														"getLanguage"
+													]
+												},
+												"description": "getLangauge"
+											},
+											"response": [
+												{
+													"name": "getLanguage",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Host",
+																"value": "<string>",
+																"disabled": true
+															},
+															{
+																"key": "Content-Type",
+																"value": "application/json",
+																"disabled": true
+															}
+														],
+														"url": {
+															"raw": "{{profileUrl}}/profile/profile/getLanguage",
+															"host": [
+																"{{profileUrl}}"
+															],
+															"path": [
+																"profile",
+																"profile",
+																"getLanguage"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "updateLanguage",
+									"item": [
+										{
+											"name": "updateLanguage",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"// Assertion - Check status code\r",
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"\r",
+															"pm.test(\"Check update Language success\", function() {\r",
+															"    var response = pm.response.json();\r",
+															"    // Correctly check for 'success' not 'isSuccess'\r",
+															"    pm.expect(response.success, \"Expect success to be true\").to.be.true;\r",
+															"});\r",
+															"\r",
+															"// There is no handling for failure scenario based on your initial script, but it could look like this:\r",
+															"pm.test(\"Handle failure scenario\", function() {\r",
+															"    var response = pm.response.json();\r",
+															"    if (!response.success) {\r",
+															"        // Log the error message for further investigation\r",
+															"        console.log(\"Failed with error:\", response.message);\r",
+															"        pm.expect(response.message, \"Error message should be appropriate\").to.include(\"known error part\");\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{authToken}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Host",
+														"value": "<string>",
+														"disabled": true
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"id\": \"{{personLanguageId}}\",\n  \"name\": \"English1\",\n  \"level\": \"Conversational\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{profileUrl}}/profile/profile/updateLanguage",
+													"host": [
+														"{{profileUrl}}"
+													],
+													"path": [
+														"profile",
+														"profile",
+														"updateLanguage"
+													]
+												},
+												"description": "updateLanguage"
+											},
+											"response": [
+												{
+													"name": "edit a Language",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Host",
+																"value": "<string>",
+																"disabled": true
+															},
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"id\": \"{{personLanguageId}}\",\n  \"name\": \"English23\",\n  \"level\": \"Conversational\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{profileUrl}}/profile/profile/updateLanguage",
+															"host": [
+																"{{profileUrl}}"
+															],
+															"path": [
+																"profile",
+																"profile",
+																"updateLanguage"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "deleteLanguage",
+									"item": [
+										{
+											"name": "deleteLangauge",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"// Assertion - Check status code\r",
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"\r",
+															"pm.test(\"Check delete Language success\", function() {\r",
+															"    var response = pm.response.json();\r",
+															"    // Correctly check for 'success' not 'isSuccess'\r",
+															"    pm.expect(response.success, \"Expect success to be true\").to.be.true;\r",
+															"});\r",
+															"\r",
+															"// There is no handling for failure scenario based on your initial script, but it could look like this:\r",
+															"pm.test(\"Handle failure scenario\", function() {\r",
+															"    var response = pm.response.json();\r",
+															"    if (!response.success) {\r",
+															"        // Log the error message for further investigation\r",
+															"        console.log(\"Failed with error:\", response.message);\r",
+															"        pm.expect(response.message, \"Error message should be appropriate\").to.include(\"known error part\");\r",
+															"    }\r",
+															"});"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{authToken}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Host",
+														"value": "<string>",
+														"disabled": true
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"id\": \"{{personLanguageId}}\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{profileUrl}}/profile/profile/deleteLanguage",
+													"host": [
+														"{{profileUrl}}"
+													],
+													"path": [
+														"profile",
+														"profile",
+														"deleteLanguage"
+													]
+												},
+												"description": "deleteLangauge"
+											},
+											"response": [
+												{
+													"name": "delete a Language",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Host",
+																"value": "<string>",
+																"disabled": true
+															},
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"id\": \"{{personLanguageId}}\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{profileUrl}}/profile/profile/deleteLanguage",
+															"host": [
+																"{{profileUrl}}"
+															],
+															"path": [
+																"profile",
+																"profile",
+																"deleteLanguage"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Certification",
+							"item": [
+								{
+									"name": "addCertification",
+									"item": [
+										{
+											"name": "addCertification",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"// Assertion - Check status code\r",
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"\r",
+															"pm.test(\"Check add Certification success\", function() {\r",
+															"    var response = pm.response.json();\r",
+															"    // Correctly check for 'success' not 'isSuccess'\r",
+															"    pm.expect(response.success, \"Expect success to be true\").to.be.true;\r",
+															"});\r",
+															"\r",
+															"// There is no handling for failure scenario based on your initial script, but it could look like this:\r",
+															"pm.test(\"Handle failure scenario\", function() {\r",
+															"    var response = pm.response.json();\r",
+															"    if (!response.success) {\r",
+															"        // Log the error message for further investigation\r",
+															"        console.log(\"Failed with error:\", response.message);\r",
+															"        pm.expect(response.message, \"Error message should be appropriate\").to.include(\"known error part\");\r",
+															"    }\r",
+															"});"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{authToken}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Host",
+														"value": "<string>",
+														"disabled": true
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"certificationName\": \"ISTQB\",\n  \"certificationFrom\": \"istqb\",\n  \"certificationYear\": \"2023\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{profileUrl}}/profile/profile/addCertification",
+													"host": [
+														"{{profileUrl}}"
+													],
+													"path": [
+														"profile",
+														"profile",
+														"addCertification"
+													]
+												},
+												"description": "addCertification"
+											},
+											"response": [
+												{
+													"name": "correct mandatory field",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Host",
+																"value": "<string>",
+																"disabled": true
+															},
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"certificationName\": \"ISTQB\",\n  \"certificationFrom\": \"istqb\",\n  \"certificationYear\": \"2023\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{profileUrl}}/profile/profile/addCertification",
+															"host": [
+																"{{profileUrl}}"
+															],
+															"path": [
+																"profile",
+																"profile",
+																"addCertification"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												},
+												{
+													"name": "incorrect mandatory field",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Host",
+																"value": "<string>",
+																"disabled": true
+															},
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"certificationName\": \"ISTQB\",\n  \"certificationFrom\": \"\",\n  \"certificationYear\": \"\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{profileUrl}}/profile/profile/addCertification",
+															"host": [
+																"{{profileUrl}}"
+															],
+															"path": [
+																"profile",
+																"profile",
+																"addCertification"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												},
+												{
+													"name": "more than 50 letters in the certification field",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Host",
+																"value": "<string>"
+															},
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"certificationName\": \"ISTQBISTQBISTQBISTQBISTQBISTQBISTQBISTQBISTQBISTQBISTQBISTQBISTQBISTQB\",\n  \"certificationFrom\": \"istqb\",\n  \"certificationYear\": \"2023\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{profileUrl}}/profile/profile/addCertification",
+															"host": [
+																"{{profileUrl}}"
+															],
+															"path": [
+																"profile",
+																"profile",
+																"addCertification"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												},
+												{
+													"name": "more than 50 letters in the certified from field",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Host",
+																"value": "<string>"
+															},
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"certificationName\": \"ISTQB\",\n  \"certificationFrom\": \"istqbistqbistqbistqbistqbistqbistqbistqbistqbistqbistqbistqb\",\n  \"certificationYear\": \"2023\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{profileUrl}}/profile/profile/addCertification",
+															"host": [
+																"{{profileUrl}}"
+															],
+															"path": [
+																"profile",
+																"profile",
+																"addCertification"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "getCertification",
+									"item": [
+										{
+											"name": "getCertification",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"let response = pm.response.json();\r",
+															"// Check if the response array is not empty and has the data\r",
+															"if (response.length > 0 && response[0].hasOwnProperty('id')) {\r",
+															"    // Set the personLanguageId as an environment variable\r",
+															"    pm.environment.set(\"id\", response[0].id);\r",
+															"}\r",
+															"\r",
+															"// Assertion - Check status code\r",
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"\r",
+															"// Assertion to check if the 'id' is correct\r",
+															"pm.test(\"Check get Language success\", function() {\r",
+															"    pm.expect(response.length, \"Response should not be empty\").to.be.above(0);\r",
+															"    pm.expect(response[0], \"First item should have id\").to.have.property(\"id\");\r",
+															"});\r",
+															"\r",
+															"// Handle failure scenario\r",
+															"pm.test(\"Handle failure scenario\", function() {\r",
+															"    if (response.length === 0 || !response[0].id) {\r",
+															"        console.log(\"Failed with error: Missing id\");\r",
+															"        pm.expect.fail(\"No id found or response is empty.\");\r",
+															"    }\r",
+															"});"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{authToken}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [
+													{
+														"key": "Host",
+														"value": "<string>",
+														"disabled": true
+													},
+													{
+														"key": "Content-Type",
+														"value": "text/plain"
+													}
+												],
+												"url": {
+													"raw": "{{profileUrl}}/profile/profile/getCertification",
+													"host": [
+														"{{profileUrl}}"
+													],
+													"path": [
+														"profile",
+														"profile",
+														"getCertification"
+													]
+												},
+												"description": "getCertification"
+											},
+											"response": [
+												{
+													"name": "getCertification",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Host",
+																"value": "<string>",
+																"disabled": true
+															},
+															{
+																"key": "Content-Type",
+																"value": "text/plain"
+															}
+														],
+														"url": {
+															"raw": "{{profileUrl}}/profile/profile/getCertification",
+															"host": [
+																"{{profileUrl}}"
+															],
+															"path": [
+																"profile",
+																"profile",
+																"getCertification"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "deleteCertification",
+									"item": [
+										{
+											"name": "deleteCertification",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"let response = pm.response.json();\r",
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"pm.test(\"Certification deletion successful\", function () {\r",
+															"    pm.expect(response.success).to.be.true;\r",
+															"});\r",
+															"\r",
+															"// There is no handling for failure scenario based on your initial script, but it could look like this:\r",
+															"pm.test(\"Handle failure scenario\", function() {\r",
+															"    var response = pm.response.json();\r",
+															"    if (!response.success) {\r",
+															"        // Log the error message for further investigation\r",
+															"        console.log(\"Failed with error:\", response.message);\r",
+															"        pm.expect(response.message, \"Error message should be appropriate\").to.include(\"known error part\");\r",
+															"    }\r",
+															"});"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{authToken}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Host",
+														"value": "<string>",
+														"disabled": true
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"id\": \"{{id}}\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{profileUrl}}/profile/profile/deleteCertification",
+													"host": [
+														"{{profileUrl}}"
+													],
+													"path": [
+														"profile",
+														"profile",
+														"deleteCertification"
+													]
+												},
+												"description": "deleteCertification"
+											},
+											"response": [
+												{
+													"name": "deleteCertification",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Host",
+																"value": "<string>",
+																"disabled": true
+															},
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"id\": \"{{id}}\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{profileUrl}}/profile/profile/deleteCertification",
+															"host": [
+																"{{profileUrl}}"
+															],
+															"path": [
+																"profile",
+																"profile",
+																"deleteCertification"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Education",
+							"item": [
+								{
+									"name": "addEducation",
+									"item": [
+										{
+											"name": "addEducation",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"// Assertion - Check status code\r",
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"\r",
+															"pm.test(\"Check add Education success\", function() {\r",
+															"    var response = pm.response.json();\r",
+															"    // Correctly check for 'success' not 'isSuccess'\r",
+															"    pm.expect(response.success, \"Expect success to be true\").to.be.true;\r",
+															"});\r",
+															"\r",
+															"// There is no handling for failure scenario based on your initial script, but it could look like this:\r",
+															"pm.test(\"Handle failure scenario\", function() {\r",
+															"    var response = pm.response.json();\r",
+															"    if (!response.success) {\r",
+															"        // Log the error message for further investigation\r",
+															"        console.log(\"Failed with error:\", response.message);\r",
+															"        pm.expect(response.message, \"Error message should be appropriate\").to.include(\"known error part\");\r",
+															"    }\r",
+															"});"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{authToken}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Host",
+														"value": "<string>",
+														"disabled": true
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"country\": \"Afghanistan\",\n  \"instituteName\": \"Mars Uni\",\n  \"title\": \"M.Tech\",\n  \"degree\": \"Master\",\n  \"yearOfGraduation\": \"2022\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{profileUrl}}/profile/profile/addEducation",
+													"host": [
+														"{{profileUrl}}"
+													],
+													"path": [
+														"profile",
+														"profile",
+														"addEducation"
+													]
+												},
+												"description": "addEducation"
+											},
+											"response": [
+												{
+													"name": "Add Education",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Host",
+																"value": "<string>",
+																"disabled": true
+															},
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"country\": \"Afghanistan\",\n  \"instituteName\": \"Mars Uni\",\n  \"title\": \"M.Tech\",\n  \"degree\": \"Master\",\n  \"yearOfGraduation\": \"2022\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{profileUrl}}/profile/profile/addEducation",
+															"host": [
+																"{{profileUrl}}"
+															],
+															"path": [
+																"profile",
+																"profile",
+																"addEducation"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "getEducation",
+									"item": [
+										{
+											"name": "getEducation",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"let response = pm.response.json();  // Parse the JSON response\r",
+															"\r",
+															"// Check if the operation was successful and the education array has at least one entry\r",
+															"if (response.success && response.education && response.education.length > 0) {\r",
+															"    // Set the first education entry's ID as an environment variable\r",
+															"    pm.environment.set(\"educationId\", response.education[0].id);\r",
+															"    console.log(\"Education ID set to:\", response.education[0].id);\r",
+															"} else {\r",
+															"    // Log error information if the conditions are not met\r",
+															"    console.error('Failed to fetch valid response or no education data available:', response);\r",
+															"}\r",
+															"\r",
+															"// Assertion - Check status code\r",
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"\r",
+															"pm.test(\"Check get Education success\", function() {\r",
+															"    var response = pm.response.json();\r",
+															"    // Correctly check for 'success' not 'isSuccess'\r",
+															"    pm.expect(response.success, \"Expect success to be true\").to.be.true;\r",
+															"});\r",
+															"\r",
+															"// There is no handling for failure scenario based on your initial script, but it could look like this:\r",
+															"pm.test(\"Handle failure scenario\", function() {\r",
+															"    var response = pm.response.json();\r",
+															"    if (!response.success) {\r",
+															"        // Log the error message for further investigation\r",
+															"        console.log(\"Failed with error:\", response.message);\r",
+															"        pm.expect(response.message, \"Error message should be appropriate\").to.include(\"known error part\");\r",
+															"    }\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{authToken}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [
+													{
+														"key": "Host",
+														"value": "<string>",
+														"disabled": true
+													},
+													{
+														"key": "Content-Type",
+														"value": "text/plain"
+													}
+												],
+												"url": {
+													"raw": "{{profileUrl}}/profile/profile/getEducation",
+													"host": [
+														"{{profileUrl}}"
+													],
+													"path": [
+														"profile",
+														"profile",
+														"getEducation"
+													]
+												},
+												"description": "getEducation"
+											},
+											"response": [
+												{
+													"name": "Get Education",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Host",
+																"value": "<string>",
+																"disabled": true
+															},
+															{
+																"key": "Content-Type",
+																"value": "text/plain"
+															}
+														],
+														"url": {
+															"raw": "{{profileUrl}}/profile/profile/getEducation",
+															"host": [
+																"{{profileUrl}}"
+															],
+															"path": [
+																"profile",
+																"profile",
+																"getEducation"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "updateEducation",
+									"item": [
+										{
+											"name": "updateEducation",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"// Assertion - Check status code\r",
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"\r",
+															"pm.test(\"Check update Education success\", function() {\r",
+															"    var response = pm.response.json();\r",
+															"    // Correctly check for 'success' not 'isSuccess'\r",
+															"    pm.expect(response.success, \"Expect success to be true\").to.be.true;\r",
+															"});\r",
+															"\r",
+															"// There is no handling for failure scenario based on your initial script, but it could look like this:\r",
+															"pm.test(\"Handle failure scenario\", function() {\r",
+															"    var response = pm.response.json();\r",
+															"    if (!response.success) {\r",
+															"        // Log the error message for further investigation\r",
+															"        console.log(\"Failed with error:\", response.message);\r",
+															"        pm.expect(response.message, \"Error message should be appropriate\").to.include(\"known error part\");\r",
+															"    }\r",
+															"});"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{authToken}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Host",
+														"value": "<string>",
+														"disabled": true
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"id\": \"{{educationId}}\",\n  \"country\": \"Albania\",\n  \"instituteName\": \"Mars Uni1234\",\n  \"degree\": \"Master\",\n  \"title\": \"M.Tech\",\n  \"yearOfGraduation\": 2022\n}\n",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{profileUrl}}/profile/profile/updateEducation",
+													"host": [
+														"{{profileUrl}}"
+													],
+													"path": [
+														"profile",
+														"profile",
+														"updateEducation"
+													]
+												},
+												"description": "updateEducation"
+											},
+											"response": [
+												{
+													"name": "Update Education",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Host",
+																"value": "<string>",
+																"disabled": true
+															},
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"id\": \"{{id}}\",\n  \"country\": \"Albania\",\n  \"instituteName\": \"Mars Uni1234\",\n  \"degree\": \"Master\",\n  \"title\": \"M.Tech\",\n  \"yearOfGraduation\": 2022\n}\n\n",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{profileUrl}}/profile/profile/updateEducation",
+															"host": [
+																"{{profileUrl}}"
+															],
+															"path": [
+																"profile",
+																"profile",
+																"updateEducation"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "deleteEducation",
+									"item": [
+										{
+											"name": "deleteEducation",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"// Assertion - Check status code\r",
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"\r",
+															"pm.test(\"Check delete Education success\", function() {\r",
+															"    var response = pm.response.json();\r",
+															"    // Correctly check for 'success' not 'isSuccess'\r",
+															"    pm.expect(response.success, \"Expect success to be true\").to.be.true;\r",
+															"});\r",
+															"\r",
+															"// There is no handling for failure scenario based on your initial script, but it could look like this:\r",
+															"pm.test(\"Handle failure scenario\", function() {\r",
+															"    var response = pm.response.json();\r",
+															"    if (!response.success) {\r",
+															"        // Log the error message for further investigation\r",
+															"        console.log(\"Failed with error:\", response.message);\r",
+															"        pm.expect(response.message, \"Error message should be appropriate\").to.include(\"known error part\");\r",
+															"    }\r",
+															"});"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disabledSystemHeaders": {}
+											},
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{authToken}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Host",
+														"value": "<string>",
+														"disabled": true
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"id\": \"{{educationId}}\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{profileUrl}}/profile/profile/deleteEducation",
+													"host": [
+														"{{profileUrl}}"
+													],
+													"path": [
+														"profile",
+														"profile",
+														"deleteEducation"
+													]
+												},
+												"description": "deleteEducation"
+											},
+											"response": [
+												{
+													"name": "Delete Education",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Host",
+																"value": "<string>",
+																"disabled": true
+															},
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"id\": \"{{educationId}}\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{profileUrl}}/profile/profile/deleteEducation",
+															"host": [
+																"{{profileUrl}}"
+															],
+															"path": [
+																"profile",
+																"profile",
+																"deleteEducation"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Skill",
+							"item": [
+								{
+									"name": "addSkill",
+									"item": [
+										{
+											"name": "addSkill",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"\r",
+															"pm.test(\"Check add Skill success\", function() {\r",
+															"    var response = pm.response.json();\r",
+															"    // Correctly check for 'success' not 'isSuccess'\r",
+															"    pm.expect(response.success, \"Expect success to be true\").to.be.true;\r",
+															"});\r",
+															"\r",
+															"// There is no handling for failure scenario based on your initial script, but it could look like this:\r",
+															"pm.test(\"Handle failure scenario\", function() {\r",
+															"    var response = pm.response.json();\r",
+															"    if (!response.success) {\r",
+															"        // Log the error message for further investigation\r",
+															"        console.log(\"Failed with error:\", response.message);\r",
+															"        pm.expect(response.message, \"Error message should be appropriate\").to.include(\"known error part\");\r",
+															"    }\r",
+															"});"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{authToken}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Host",
+														"value": "<string>",
+														"disabled": true
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"Skill\": \"English\",\n  \"ExperienceLevel\": \"Expert\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{profileUrl}}/profile/profile/addSkill",
+													"host": [
+														"{{profileUrl}}"
+													],
+													"path": [
+														"profile",
+														"profile",
+														"addSkill"
+													]
+												},
+												"description": "addSkill"
+											},
+											"response": [
+												{
+													"name": "CorrectMandatory",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Host",
+																"value": "<string>",
+																"disabled": true
+															},
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"Skill\": \"English\",\n  \"ExperienceLevel\": \"Expert\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{profileUrl}}/profile/profile/addSkill",
+															"host": [
+																"{{profileUrl}}"
+															],
+															"path": [
+																"profile",
+																"profile",
+																"addSkill"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												},
+												{
+													"name": "Add a space on skill field",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Host",
+																"value": "<string>",
+																"disabled": true
+															},
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"Skill\": \" \",\n  \"ExperienceLevel\": \"Expert\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{profileUrl}}/profile/profile/addSkill",
+															"host": [
+																"{{profileUrl}}"
+															],
+															"path": [
+																"profile",
+																"profile",
+																"addSkill"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												},
+												{
+													"name": "Add special character on Skill field",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Host",
+																"value": "<string>"
+															},
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"ExperienceLevel\": \"<string>\",\n  \"PersonSkillId\": \"<number>\",\n  \"Skill\": \"<string>\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{profileUrl}}/profile/profile/addSkill",
+															"host": [
+																"{{profileUrl}}"
+															],
+															"path": [
+																"profile",
+																"profile",
+																"addSkill"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												},
+												{
+													"name": "over 50 characters on Add skill field",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Host",
+																"value": "<string>",
+																"disabled": true
+															},
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"Skill\": \"EnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglish\",\n  \"ExperienceLevel\": \"Expert\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{profileUrl}}/profile/profile/addSkill",
+															"host": [
+																"{{profileUrl}}"
+															],
+															"path": [
+																"profile",
+																"profile",
+																"addSkill"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												},
+												{
+													"name": "duplicate on Add skill field",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Host",
+																"value": "<string>"
+															},
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"ExperienceLevel\": \"<string>\",\n  \"PersonSkillId\": \"<number>\",\n  \"Skill\": \"<string>\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{profileUrl}}/profile/profile/addSkill",
+															"host": [
+																"{{profileUrl}}"
+															],
+															"path": [
+																"profile",
+																"profile",
+																"addSkill"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												},
+												{
+													"name": "a paragraph on Add skill field",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Host",
+																"value": "<string>",
+																"disabled": true
+															},
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"Skill\": \"EnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglishEnglish\",\n  \"ExperienceLevel\": \"Expert\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{profileUrl}}/profile/profile/addSkill",
+															"host": [
+																"{{profileUrl}}"
+															],
+															"path": [
+																"profile",
+																"profile",
+																"addSkill"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "getSkill",
+									"item": [
+										{
+											"name": "getSkill",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"let responseData = pm.response.json();\r",
+															"if (Array.isArray(responseData) && responseData.length > 0) \r",
+															"{\r",
+															"    pm.environment.set(\"personSkillId\", responseData[0].personSkillId);\r",
+															"    console.log(\"Skill ID set to:\", responseData[0].personSkillId);\r",
+															"} else {\r",
+															"    console.error('Failed to fetch valid response or no skill data available.');\r",
+															"}\r",
+															"\r",
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"\r",
+															"// Assertion to check if the 'id' is correct\r",
+															"pm.test(\"Check get Skill success\", function() {\r",
+															"    pm.expect(responseData.length, \"Response should not be empty\").to.be.above(0);\r",
+															"    pm.expect(responseData[0], \"First item should have personSkillId\").to.have.property(\"personSkillId\");\r",
+															"});\r",
+															"\r",
+															"// Handle failure scenario\r",
+															"pm.test(\"Handle failure scenario\", function() {\r",
+															"    if (responseData.length === 0 || !responseData[0].personSkillId) {\r",
+															"        console.log(\"Failed with error: Missing personSkillId\");\r",
+															"        pm.expect.fail(\"No personSkillId found or response is empty.\");\r",
+															"    }\r",
+															"});"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{authToken}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [
+													{
+														"key": "Host",
+														"value": "<string>",
+														"disabled": true
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{profileUrl}}/profile/profile/getSkill",
+													"host": [
+														"{{profileUrl}}"
+													],
+													"path": [
+														"profile",
+														"profile",
+														"getSkill"
+													]
+												},
+												"description": "getSkill"
+											},
+											"response": [
+												{
+													"name": "getSkill",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Host",
+																"value": "<string>",
+																"disabled": true
+															},
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															}
+														],
+														"url": {
+															"raw": "{{profileUrl}}/profile/profile/getSkill",
+															"host": [
+																"{{profileUrl}}"
+															],
+															"path": [
+																"profile",
+																"profile",
+																"getSkill"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "updateSkill",
+									"item": [
+										{
+											"name": "updateSkill",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"// Assertion - Check status code\r",
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"\r",
+															"pm.test(\"Check update Skill success\", function() {\r",
+															"    var response = pm.response.json();\r",
+															"    // Correctly check for 'success' not 'isSuccess'\r",
+															"    pm.expect(response.success, \"Expect success to be true\").to.be.true;\r",
+															"});\r",
+															"\r",
+															"// There is no handling for failure scenario based on your initial script, but it could look like this:\r",
+															"pm.test(\"Handle failure scenario\", function() {\r",
+															"    var response = pm.response.json();\r",
+															"    if (!response.success) {\r",
+															"        // Log the error message for further investigation\r",
+															"        console.log(\"Failed with error:\", response.message);\r",
+															"        pm.expect(response.message, \"Error message should be appropriate\").to.include(\"known error part\");\r",
+															"    }\r",
+															"});"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{authToken}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Host",
+														"value": "<string>",
+														"disabled": true
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"ExperienceLevel\": \"Expert\",\n  \"PersonSkillId\": \"{{personSkillId}}\",\n  \"Skill\": \"ManagementUpdate\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{profileUrl}}/profile/profile/updateSkill",
+													"host": [
+														"{{profileUrl}}"
+													],
+													"path": [
+														"profile",
+														"profile",
+														"updateSkill"
+													]
+												},
+												"description": "updateSkill"
+											},
+											"response": [
+												{
+													"name": "updateSkill",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Host",
+																"value": "<string>",
+																"disabled": true
+															},
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"ExperienceLevel\": \"Expert\",\n  \"PersonSkillId\": \"{{personSkillId}}\",\n  \"Skill\": \"ManagementUpdate\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{profileUrl}}/profile/profile/updateSkill",
+															"host": [
+																"{{profileUrl}}"
+															],
+															"path": [
+																"profile",
+																"profile",
+																"updateSkill"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "deleteSkill",
+									"item": [
+										{
+											"name": "deleteSkill",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"// Assertion - Check status code\r",
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"\r",
+															"pm.test(\"Check delete Skill success\", function() {\r",
+															"    var response = pm.response.json();\r",
+															"    // Correctly check for 'success' not 'isSuccess'\r",
+															"    pm.expect(response.success, \"Expect success to be true\").to.be.true;\r",
+															"});\r",
+															"\r",
+															"// There is no handling for failure scenario based on your initial script, but it could look like this:\r",
+															"pm.test(\"Handle failure scenario\", function() {\r",
+															"    var response = pm.response.json();\r",
+															"    if (!response.success) {\r",
+															"        // Log the error message for further investigation\r",
+															"        console.log(\"Failed with error:\", response.message);\r",
+															"        pm.expect(response.message, \"Error message should be appropriate\").to.include(\"known error part\");\r",
+															"    }\r",
+															"});"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{authToken}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Host",
+														"value": "<string>",
+														"disabled": true
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n   \"PersonSkillId\": \"{{personSkillId}}\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{profileUrl}}/profile/profile/deleteSkill",
+													"host": [
+														"{{profileUrl}}"
+													],
+													"path": [
+														"profile",
+														"profile",
+														"deleteSkill"
+													]
+												},
+												"description": "deleteSkill"
+											},
+											"response": [
+												{
+													"name": "deleteSkill",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Host",
+																"value": "<string>",
+																"disabled": true
+															},
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n   \"PersonSkillId\": \"{{personSkillId}}\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{profileUrl}}/profile/profile/deleteSkill",
+															"host": [
+																"{{profileUrl}}"
+															],
+															"path": [
+																"profile",
+																"profile",
+																"deleteSkill"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Chat API",
+			"item": [
+				{
+					"name": "Get Chatroom",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the response body\r",
+									"var responseData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Assertion to check if the 'id' is correct\r",
+									"pm.test(\"Check get First Chat room\", function() {\r",
+									"    pm.expect(responseData, \"Response should not be empty\").to.be.an('object');\r",
+									"    pm.expect(responseData, \"First item should have chatroom\").to.have.property(\"chatroom\");\r",
+									"    pm.expect(responseData.chatroom, \"chatroom should not be empty\").to.not.be.empty;\r",
+									"});\r",
+									"\r",
+									"// Handle failure scenario\r",
+									"pm.test(\"Handle failure scenario\", function() {\r",
+									"    if (!responseData.chatroom) {\r",
+									"        console.log(\"Failed with error: Missing chatroom\");\r",
+									"        pm.expect.fail(\"No chatroom found or response is empty.\");\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{profileUrl}}/profile/profile/getFirstChatroom",
+							"host": [
+								"{{profileUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"getFirstChatroom"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Chatroom",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{profileUrl}}/profile/profile/getFirstChatroom",
+									"host": [
+										"{{profileUrl}}"
+									],
+									"path": [
+										"profile",
+										"profile",
+										"getFirstChatroom"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Get Chatroom detail list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the response body\r",
+									"var responseData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Assertion to check if the 'id' is correct\r",
+									"pm.test(\"Check get First Chat room\", function() {\r",
+									"pm.expect(responseData, \"Response should not be empty\").to.be.an('object');\r",
+									"pm.expect(responseData.result, \"'result' should be an array\").to.be.an('array');\r",
+									"pm.expect(responseData.result.length, \"'result' array should not be empty\").to.be.above(0);\r",
+									"pm.expect(responseData.result[0], \"First item in 'result' should have 'userIdTo'\").to.have.property(\"userIdTo\");\r",
+									"});\r",
+									"\r",
+									"// Handle failure scenario\r",
+									"pm.test(\"Handle failure scenario\", function() {\r",
+									"    if (!responseData.result || !responseData.result.length === 0 || !responseData.result[0].userIdTo) {\r",
+									"        console.log(\"Failed with error: Missing userIdTo\");\r",
+									"        pm.expect.fail(\"No userIdTo found or response is empty.\");\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"UserIdToList\": [\r\n    \"6571182b30659200012237cb\",\r\n    \"658b814f85cbee000129d543\",\r\n    \"642ba8dc631d8c0001a57d72\",\r\n    \"657ae882284fb00001576637\"\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{profileUrl}}/profile/profile/getChatRoomDetailsList/",
+							"host": [
+								"{{profileUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"getChatRoomDetailsList",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost/"
+		}
+	]
+}
